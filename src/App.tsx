@@ -1,10 +1,14 @@
-import React from 'react';
+import React from "react";
+
+// @Pages
+import AgentSeeker from "./pages/AgentSeeker";
+
 
 function App() {
   return (
-    <div className="App">
-     hola
-    </div>
+    <>
+     <AgentSeeker />
+    </>
   );
 }
 
