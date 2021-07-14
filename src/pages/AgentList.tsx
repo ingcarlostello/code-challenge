@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // @Components
 import AgentCard from "../components/AgentCard";
 import OrderAgentsBy from "../components/OrderAgentsBy";
 import SeeMoreSeeLess from "../components/SeeMore_SeeLess";
+import { AgentsContext } from "../context/AgentsContext";
+
+
 
 // @labels
 import { labels } from "../labels/labels";
 
 const AgentList = () => {
+
+  const {income, firtsThreeAgents} = useContext(AgentsContext)
+
   return (
     <>
       <div>
@@ -17,7 +23,7 @@ const AgentList = () => {
             {labels.yourMatches}
           </p>
           <p className="text-lg font-sans text-gray-600 text-center mb-14">
-            {labels.yourIncome}: <strong>$400,000</strong>{" "}
+            {labels.yourIncome}: <strong>${income}</strong>{" "}
           </p>
         </div>
 
@@ -29,29 +35,20 @@ const AgentList = () => {
           </div>
 
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
-            <div>
-              <AgentCard />
-            </div>
-
-            <div>
-              <AgentCard />
-            </div>
-
-            <div>
-              <AgentCard />
-            </div>
-
-            <div>
-              <AgentCard />
-            </div>
-
-            <div>
-              <AgentCard />
-            </div>
-
-            <div>
-              <AgentCard />
-            </div>
+            {
+              firtsThreeAgents.map((filterAgent:any) => (
+                <div>
+                  <AgentCard 
+                    agentName={filterAgent.name}
+                    agentId={filterAgent.id}
+                    agentIncome={filterAgent.income}
+                    agentAvatar={filterAgent.avatar}
+                  />
+                </div>
+              ))
+            }
+           
+           
           </div>
 
           <div className="grid grid-cols-1 gap-4 justify-items-end pr-20 mt-12">

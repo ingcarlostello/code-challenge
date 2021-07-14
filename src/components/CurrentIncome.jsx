@@ -1,15 +1,40 @@
 
-import React from "react";
+import React, { useEffect, useState }  from "react";
 
 // @Components
 import GetMatchesButton from "./GetMatchesButton";
+
 
 
 // @Labels
 import { labels } from "../labels/labels";
 
 
+
 const CurrentIncome = () => {
+
+    const [amountMoney, setAmountMoney] = useState()
+
+    const handleChange = (e) => {
+        const {value} = e.target
+        let price = parseInt(value)
+        setAmountMoney(price)
+    }
+
+
+
+  
+   
+    
+
+
+
+
+
+
+
+
+
     return (
         <>
             <div>
@@ -24,14 +49,18 @@ const CurrentIncome = () => {
                         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full h-11 pl-7 pr-12 sm:text-sm border-2 border-gray-300 rounded-md"
                         id="income"
                         maxLength={5}
-                        name="income"
+                        name="amountMoney"
                         type="text"
                         pattern="[0-9]"
-                      
+                        value={amountMoney}
+                        onChange={handleChange}                      
                     />                 
                 </div>
                 <div className="float-right">
-                    <GetMatchesButton />
+                    <GetMatchesButton 
+                    //    filterAgents={filterAgents}
+                       amountMoney={amountMoney}
+                    />
                 </div>
             </div>
         </>

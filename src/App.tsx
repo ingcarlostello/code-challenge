@@ -1,23 +1,19 @@
 import React, { useContext } from "react";
 import Header from "./components/Header";
 
-// @Context
-import showAgentListContext from "./context/showAgentListContext";
+import { AgentsContext } from "./context/AgentsContext";
 
 // @Pages
 import AgentList from "./pages/AgentList";
 import AgentSeeker from "./pages/AgentSeeker";
 
 function App() {
-  const {
-    //* -States
-    showAgentList,
-  } = useContext(showAgentListContext);
+  const { agentSeekerPage } = useContext(AgentsContext);
 
   return (
     <>
       <Header />
-      {showAgentList ? <AgentSeeker /> : <AgentList />}
+      {agentSeekerPage ? <AgentSeeker /> : <AgentList />}
     </>
   );
 }

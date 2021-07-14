@@ -1,14 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import AgentsProvider from "./context/AgentsContext";
+import "./index.css";
+
 // @Provider
-import ShowAgentListStateProvider from "./context/showAgentListState";
+
 
 ReactDOM.render(
-  <ShowAgentListStateProvider>
-    <App />
-  </ShowAgentListStateProvider>,
-  document.getElementById('root')
+ <AgentsProvider>
+  <App />
+ </AgentsProvider>,    
+  document.getElementById("root")
 );
-

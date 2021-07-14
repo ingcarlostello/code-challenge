@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // @assets
 import usersImage from "../assets/users.png";
 
 // @Components
 import CurrentIncome from "../components/CurrentIncome";
+import { AgentsContext } from "../context/AgentsContext";
 
 // @Labels
 import { labels } from "../labels/labels";
 
 
+
+
 const AgentSeeker = () => {
+
+    // const {filterAgents} = useContext(AgentsContext)
+
     return (
         <>
             <div className="flex h-screen justify-center items-center">
@@ -23,7 +29,9 @@ const AgentSeeker = () => {
                         <p className="text-base font-sans text-center mb-14">{labels.fillInformation}</p>
                     </div>
                     <div>
-                        <CurrentIncome />
+                        <CurrentIncome 
+                            // filterAgents={filterAgents}
+                        />
                     </div>
                 </div>
             </div>
