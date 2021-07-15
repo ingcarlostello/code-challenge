@@ -4,6 +4,11 @@ import React, { useContext } from "react";
 // @Context
 import { AgentsContext } from "../context/AgentsContext";
 
+// @Labels
+import { labels } from "../labels/labels";
+
+
+
 const OrderAgentsBy = () => {
   const { selectCategory } = useContext(AgentsContext);
 
@@ -16,16 +21,16 @@ const OrderAgentsBy = () => {
         onChange={(e) => selectCategory(e.target.value)}
       >
         <option value="">
-          Select...
+          {labels.select}
         </option>
         <option className="p-5" value="alphabetically">
-          Name (A-Z)
+          {labels.aZ}
         </option>
         <option className="h-40" value="highIncome">
-          Income: High first
+         {labels.incomeHf}
         </option>
         <option className="h-12" value="lowIncome">
-          Income: Low first
+          {labels.incomelf}
         </option>
       </select>
     </>

@@ -4,12 +4,12 @@ import React, { useContext } from "react";
 // @Context
 import { AgentsContext } from "../context/AgentsContext";
 
+// @Labels
+import { labels } from "../labels/labels";
+
+
 const SeeMore_SeeLess = () => {
     const { seeMoreAgents, seeLessAgents } = useContext(AgentsContext);
-
-    // const showLessAgents = () => {
-    //     showLeesAgentsOnlist();
-    // };
 
     return (
         <>
@@ -19,14 +19,14 @@ const SeeMore_SeeLess = () => {
                     onClick={() => seeLessAgents()}
                     style={{ color: "#5C7BEB" }}
                 >
-                    Show less <span className="ml-4">-</span>
+                    {labels.showLess} <span className="ml-4">-</span>
                 </span>
                 <span
                     className="font-bold cursor-pointer"
                     onClick={() => seeMoreAgents()}
                     style={{ color: "#5C7BEB" }}
                 >
-                    Show more <span className="ml-4">+</span>
+                    {labels.showMore} <span className="ml-4">+</span>
                 </span>
             </div>
         </>

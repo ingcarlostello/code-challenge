@@ -18,8 +18,8 @@ const AgentSeeker = () => {
           <div className="justify-self-center mb-6">
             <img className="h-8 w-auto sm:h-10" src={usersImage} alt="zoe" />
           </div>
-          <div className="justify-self-center">
-            <p className="text-3xl font-bold text-gray-600 font-sans text-center mb-4">
+          <div className="grid justify-items-center">
+            <p className="text-3xl font-bold text-gray-600 font-sans mb-4">
               {labels.findBestAgent}
             </p>
             <p className="text-base font-sans text-center mb-14">

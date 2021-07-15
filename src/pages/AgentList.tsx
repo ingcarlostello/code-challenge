@@ -14,8 +14,8 @@ import { AgentsContext } from "../context/AgentsContext";
 import { labels } from "../labels/labels";
 
 const AgentList = () => {
-
-  const { income, firtsThreeAgents } = useContext(AgentsContext);
+  const { income, firtsThreeAgents, filteredAgentsByMoney } =
+    useContext(AgentsContext);
   const [mobile, setMobile] = useState<boolean>();
   const match = window.matchMedia("(max-width: 700px)");
 
@@ -48,6 +48,13 @@ const AgentList = () => {
           <div className="px-8 md:px-auto lg:mx-12">
             <OrderAgentsBy />
           </div>
+
+          {filteredAgentsByMoney.length === 0 ? (
+            <div className=" text-3xl font-bold text-gray-600 font-sans text-center my-12">
+              There are not agents to this income value
+            </div>
+          ) : null}
+
           <div className="grid sm:grid-cols-1 mt-2 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
             {firtsThreeAgents.map((filterAgent: any) => (
               <div key={filterAgent.id}>

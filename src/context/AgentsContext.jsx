@@ -2,7 +2,7 @@
 import React, { createContext, useEffect, useState } from "react";
 
 // @Packages
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 export const AgentsContext = createContext();
 
@@ -11,8 +11,8 @@ const AgentsProvider = (props) => {
   const [filteredAgentsByMoney, setFilteredAgentsByMoney] = useState([]);
   const [agentSeekerPage, setAgentSeekerPage] = useState(true);
   const [income, setIncome] = useState(null);
-  const [count, setCount] = useState(0);
   const [firtsThreeAgents, setFirtsThreeAgents] = useState([]);
+  const [count, setCount] = useState(0);
   const [category, setCategory] = useState(null);
   const [seeMore, setSeeMore] = useState(0);
   const [seeLess, setSeeLess] = useState(0);
@@ -32,15 +32,22 @@ const AgentsProvider = (props) => {
 
   const seeMoreAgents = () => {
     setSeeMore(seeMore + 1);
-    if (count > filteredAgentsByMoney.length) {
+    if (firtsThreeAgents.length === filteredAgentsByMoney.length) {
       Swal.fire("There are no more agents in this search.");
       return;
     } else {
       setCount(count + 3);
     }
   };
+
   const seeLessAgents = () => {
     setSeeLess(seeLess - 1);
+    if (firtsThreeAgents.length === 3) {
+      Swal.fire("They are the 3 first agents of the list");
+      return;
+    } else {
+      setCount(count - 3);
+    }
   };
 
   useEffect(() => {
@@ -61,7 +68,6 @@ const AgentsProvider = (props) => {
           agents.income <= amountMoney + 10000
       );
       setFilteredAgentsByMoney(filterAgents);
-      //   getFirstThreeAgents()
     }
     setAgentSeekerPage(false);
   };
@@ -69,14 +75,9 @@ const AgentsProvider = (props) => {
   //* <--Get First Three Agents-->
   useEffect(() => {
     const getFirstThreeAgents = () => {
-      if (count > filteredAgentsByMoney.length) {
-        Swal.fire("There are no more agents in this search.");
-        return;
-      } else {
-        let index = count;
-        let firstThree = filteredAgentsByMoney.slice(0, index + 3);
-        setFirtsThreeAgents(firstThree);
-      }
+      let index = count;
+      let firstThree = filteredAgentsByMoney.slice(0, index + 3);
+      setFirtsThreeAgents(firstThree);
     };
     getFirstThreeAgents();
   }, [income, seeMore]);
@@ -84,24 +85,12 @@ const AgentsProvider = (props) => {
   //* <--Delete last Three Agents-->
   useEffect(() => {
     const showLeesAgentsOnlist = () => {
-      if (firtsThreeAgents.length === 3) {
-        Swal.fire("They are the 3 first agents of the list");
-        return;
-      } else if (firtsThreeAgents.length > 0) {
-        let index = count - 3;
-        //let index = 3
-        let showLessThree = firtsThreeAgents.slice(0, index);
-        setCount(index);
-        setFirtsThreeAgents(showLessThree);
-      }
+      let index = count;
+      let showLessThree = filteredAgentsByMoney.slice(0, index - 3);
+      setFirtsThreeAgents(showLessThree);
     };
     showLeesAgentsOnlist();
   }, [seeLess]);
-
-
-
-
-
 
   //* <--Order Agents Alphabetically-->
   useEffect(() => {
@@ -139,45 +128,28 @@ const AgentsProvider = (props) => {
     const HightIncomeFirts = () => {
       if (category === "highIncome") {
         let z = firtsThreeAgents.sort((a, b) => b.income - a.income);
-        setFirtsThreeAgents(z)
+        setFirtsThreeAgents(z);
         return;
       }
     };
     HightIncomeFirts();
   }, [category]);
 
-
-
-
-
-
-
-
-
-
-  console.log(filteredAgentsByMoney);
-
-  console.log(firtsThreeAgents);
-
   return (
     <AgentsContext.Provider
       value={{
         //* state
+        agentSeekerPage,
         agentsList,
         filteredAgentsByMoney,
-        agentSeekerPage,
-        income,
         firtsThreeAgents,
+        income,
 
         //* functions
         filterAgents,
-        // getFirstThreeAgents,
-        // showLeesAgentsOnlist,
-        //orderAgentsByIncome,
-        // orderBy
-        selectCategory,
-        seeMoreAgents,
         seeLessAgents,
+        seeMoreAgents,
+        selectCategory,
       }}
     >
       {props.children}

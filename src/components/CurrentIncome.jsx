@@ -14,7 +14,6 @@ const CurrentIncome = () => {
     const { value } = e.target;
     let price = value ;
     setAmountMoney(parseInt(price) || '');
-    //setAmountMoney(price);
   };
 
   return (
