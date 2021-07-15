@@ -1,29 +1,33 @@
-import React, { useContext, useEffect } from 'react';
-import { AgentsContext } from '../context/AgentsContext';
+// @React
+import React, { useContext } from "react";
 
-
+// @Context
+import { AgentsContext } from "../context/AgentsContext";
 
 const SeeMore_SeeLess = () => {
-
-    const {seeMoreAgents, showLeesAgentsOnlist} = useContext(AgentsContext)
-
-    // useEffect(() => {
-    //     getFirstThreeAgents()     
-    // }, [agentSeekerPage])
-
-    // const seeMore = () => {
-    //     console.log('click to see more');      
-    //     seeMoreAgents()  
-    // }
+    const { seeMoreAgents, showLeesAgentsOnlist } = useContext(AgentsContext);
 
     const showLessAgents = () => {
-        showLeesAgentsOnlist()
-    }
+        showLeesAgentsOnlist();
+    };
+
     return (
         <>
             <div>
-                <span onClick={showLessAgents}  style={{ color: "#5C7BEB" }} className="mr-5 font-bold cursor-pointer">Show less <span className="ml-4">-</span></span>
-                <span onClick={() => seeMoreAgents()}  style={{ color: "#5C7BEB" }} className="font-bold cursor-pointer">Show more <span className="ml-4">+</span></span>
+                <span
+                    className="mr-5 font-bold cursor-pointer"
+                    onClick={showLessAgents}
+                    style={{ color: "#5C7BEB" }}
+                >
+                    Show less <span className="ml-4">-</span>
+                </span>
+                <span
+                    className="font-bold cursor-pointer"
+                    onClick={() => seeMoreAgents()}
+                    style={{ color: "#5C7BEB" }}
+                >
+                    Show more <span className="ml-4">+</span>
+                </span>
             </div>
         </>
     );

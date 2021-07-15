@@ -1,15 +1,14 @@
+// @React
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import AgentsProvider from "./context/AgentsContext";
-import "./index.css";
 
 // @Provider
-
+import AgentsProvider from "./context/AgentsContext";
 
 ReactDOM.render(
- <AgentsProvider>
-  <App />
- </AgentsProvider>,    
+  <AgentsProvider>
+    <App />
+  </AgentsProvider>,
   document.getElementById("root")
 );

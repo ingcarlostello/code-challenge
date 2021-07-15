@@ -1,10 +1,11 @@
+// @React
 import React from "react";
 
 const AgentCardMobile = ({
-  agentName,
+  agentAvatar,
   agentId,
   agentIncome,
-  agentAvatar,
+  agentName,
 }: any) => {
   return (
     <>

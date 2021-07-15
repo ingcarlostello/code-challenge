@@ -1,39 +1,19 @@
-
-import React, { useEffect, useState }  from "react";
+import React, { useState } from "react";
 
 // @Components
 import GetMatchesButton from "./GetMatchesButton";
 
-
-
 // @Labels
 import { labels } from "../labels/labels";
 
-
-
 const CurrentIncome = () => {
-
-    const [amountMoney, setAmountMoney] = useState()
+    const [amountMoney, setAmountMoney] = useState();
 
     const handleChange = (e) => {
-        const {value} = e.target
-        let price = parseInt(value)
-        setAmountMoney(price)
-    }
-
-
-
-  
-   
-    
-
-
-
-
-
-
-
-
+        const { value } = e.target;
+        let price = parseInt(value);
+        setAmountMoney(price);
+    };
 
     return (
         <>
@@ -50,16 +30,15 @@ const CurrentIncome = () => {
                         id="income"
                         maxLength={5}
                         name="amountMoney"
-                        type="text"
+                        onChange={handleChange}
                         pattern="[0-9]"
+                        type="text"
                         value={amountMoney}
-                        onChange={handleChange}                      
-                    />                 
+                    />
                 </div>
                 <div className="float-right">
-                    <GetMatchesButton 
-                    //    filterAgents={filterAgents}
-                       amountMoney={amountMoney}
+                    <GetMatchesButton
+                        amountMoney={amountMoney}
                     />
                 </div>
             </div>

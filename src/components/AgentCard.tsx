@@ -1,37 +1,31 @@
+// @React
 import React, { useEffect } from "react";
+
+// @Components
 import AgentCardMobile from "./AgentCardMobile";
 
-
-
-
-const AgentCard = ({agentName, agentId, agentIncome, agentAvatar}:any) => {
-
-
-
-
+const AgentCard = ({ agentName, agentId, agentIncome, agentAvatar }: any) => {
   return (
     <>
-     
-        <div
-          className="shadow-xl rounded-lg overflow-hidden w-72 h-80 grid pb-5 "
-          style={{ background: "#F5F5F5" }}
-        >
-          <div className="bg-white h-60 grid place-items-center pt-4">
-            <img  src={agentAvatar} alt={agentName} />
-            <div className="p-4 grid">
-              <p className="tracking-wide text-sm font-bold text-gray-600 text-xl font-sans place-self-center">
-                {agentName}
-              </p>
-              <p className="text-gray-600 text-base font-sans place-self-center">
-                ID: {agentId}
-              </p>
-            </div>
+      <div
+        className="shadow-xl rounded-lg overflow-hidden w-72 h-80 grid pb-5 "
+        style={{ background: "#F5F5F5" }}
+      >
+        <div className="bg-white h-60 grid place-items-center pt-4">
+          <img src={agentAvatar} alt={agentName} />
+          <div className="p-4 grid">
+            <p className="tracking-wide text-sm font-bold text-gray-600 text-xl font-sans place-self-center">
+              {agentName}
+            </p>
+            <p className="text-gray-600 text-base font-sans place-self-center">
+              ID: {agentId}
+            </p>
           </div>
-          <p className="place-self-center">
-            Income: <strong className="text-gray-600">${agentIncome}</strong>
-          </p>
         </div>
-    
+        <p className="place-self-center">
+          Income: <strong className="text-gray-600">${agentIncome}</strong>
+        </p>
+      </div>
     </>
   );
 };
