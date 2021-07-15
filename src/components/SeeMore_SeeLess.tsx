@@ -9,7 +9,7 @@ import { labels } from "../labels/labels";
 
 
 const SeeMore_SeeLess = () => {
-    const { seeMoreAgents, seeLessAgents } = useContext(AgentsContext);
+    const { seeMoreAgents, seeLessAgents }:any = useContext(AgentsContext);
 
     return (
         <>

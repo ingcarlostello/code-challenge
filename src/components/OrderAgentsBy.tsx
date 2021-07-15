@@ -10,7 +10,7 @@ import { labels } from "../labels/labels";
 
 
 const OrderAgentsBy = () => {
-  const { selectCategory } = useContext(AgentsContext);
+  const { selectCategory }:any = useContext(AgentsContext);
 
   return (
     <>

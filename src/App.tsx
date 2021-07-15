@@ -13,7 +13,7 @@ import AgentSeeker from "./pages/AgentSeeker";
 
 function App() {
   
-  const { agentSeekerPage } = useContext(AgentsContext);
+  const { agentSeekerPage }:any = useContext(AgentsContext);
 
   return (
     <>

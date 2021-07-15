@@ -12,7 +12,7 @@ import Swal from 'sweetalert2'
 
 const GetMatchesButton = ({ amountMoney }: any) => {
 
-  const { filterAgents } = useContext(AgentsContext);
+  const { filterAgents }:any = useContext(AgentsContext);
 
   const handleClick = (e:any) => {
     if(amountMoney === undefined || amountMoney === 0 ||  amountMoney === ''){

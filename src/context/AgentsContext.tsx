@@ -4,20 +4,23 @@ import React, { createContext, useEffect, useState } from "react";
 // @Packages
 import Swal from "sweetalert2";
 
-export const AgentsContext = createContext();
+// export const AgentsContext = React.createContext<string | undefined | boolean | void >(undefined)
+export const AgentsContext = createContext<any>(null)
 
-const AgentsProvider = (props) => {
-  const [agentsList, setAgentsList] = useState([]);
-  const [filteredAgentsByMoney, setFilteredAgentsByMoney] = useState([]);
+
+
+const AgentsProvider = (props: any) => {
+  const [agentsList, setAgentsList] = useState<any[]>([]);
+  const [filteredAgentsByMoney, setFilteredAgentsByMoney] = useState<any[]>([]);
   const [agentSeekerPage, setAgentSeekerPage] = useState(true);
-  const [income, setIncome] = useState(null);
-  const [firtsThreeAgents, setFirtsThreeAgents] = useState([]);
+  const [income, setIncome] = useState<number>();
+  const [firtsThreeAgents, setFirtsThreeAgents] = useState<any[]>([]);
   const [count, setCount] = useState(0);
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState(String);
   const [seeMore, setSeeMore] = useState(0);
   const [seeLess, setSeeLess] = useState(0);
 
-  const selectCategory = (orderBy) => {
+  const selectCategory = (orderBy: string) => {
     if (orderBy === "lowIncome") {
       setCategory(orderBy);
       return;
@@ -30,7 +33,7 @@ const AgentsProvider = (props) => {
     }
   };
 
-  const seeMoreAgents = () => {
+ const seeMoreAgents = () => {
     setSeeMore(seeMore + 1);
     if (firtsThreeAgents.length === filteredAgentsByMoney.length) {
       Swal.fire("There are no more agents in this search.");
@@ -59,7 +62,7 @@ const AgentsProvider = (props) => {
     getAllAgents();
   }, []);
 
-  const filterAgents = (amountMoney) => {
+  const filterAgents = (amountMoney:number) => {
     if (amountMoney) {
       setIncome(amountMoney);
       const filterAgents = agentsList.filter(
@@ -134,6 +137,10 @@ const AgentsProvider = (props) => {
     };
     HightIncomeFirts();
   }, [category]);
+
+
+
+  
 
   return (
     <AgentsContext.Provider
