@@ -9,6 +9,27 @@ const AgentsProvider = (props) => {
   const [income, setIncome] = useState(null);
   const [count, setCount] = useState(0);
   const [firtsThreeAgents, setFirtsThreeAgents] = useState([]);
+  const [category, setCategory] = useState('')
+  const [seeMore, setSeeMore] = useState(0)
+
+  const selectCategory = (orderBy) => {
+    if(orderBy === 'lowIncome'){
+        setCategory(orderBy)
+        return
+    }else if (orderBy === 'highIncome'){
+        setCategory(orderBy)
+        return
+    }else if(orderBy === 'alphabetically') {
+        setCategory(orderBy)
+        return
+    }
+  }
+
+
+  const seeMoreAgents = () => {
+    setSeeMore(seeMore + 1)
+  }
+
 
 
 
@@ -58,27 +79,27 @@ const AgentsProvider = (props) => {
 //     getFirstThreeAgents()
 // }, [income])
 
-
-//   useEffect(() => {
+useEffect(() => {
     const getFirstThreeAgents = () => {
-      if (count > filteredAgentsByMoney.length ) {
-        console.log("There are not more agents that match your search");
-        return;
-      } else {
-        let index = count + 3;
-        // let index = count
-
-
-
-        let firstThree = filteredAgentsByMoney.slice(0, index);
-        setCount(index);
-        setFirtsThreeAgents(firstThree);
-      }
-    // let index = count
-    // let firstThree = filteredAgentsByMoney.slice(0, index+3);
-    // setCount(index);
-    // setFirtsThreeAgents(firstThree);
-    };
+        if (count > filteredAgentsByMoney.length ) {
+          console.log("There are not more agents that match your search");
+          return;
+        } else {
+          let index = count + 3;
+          // let index = count  
+          let firstThree = filteredAgentsByMoney.slice(0, index);
+          setCount(index);
+          setFirtsThreeAgents(firstThree);
+        }
+      // let index = count
+      // let firstThree = filteredAgentsByMoney.slice(0, index+3);
+      // setCount(index);
+      // setFirtsThreeAgents(firstThree);
+      };
+      getFirstThreeAgents()
+}, [seeMore, category])
+//   useEffect(() => {
+    
 //     getFirstThreeAgents()
 //   }, [filteredAgentsByMoney, agentSeekerPage]);
 // }, [agentSeekerPage]);
@@ -99,6 +120,40 @@ const showLeesAgentsOnlist = () => {
 
 
 
+
+    // const orderAgentsByIncome = () => {
+    //     let x = firtsThreeAgents.sort((a, b) => a.income - b.income)
+    //     setFirtsThreeAgents(x)
+    // }
+
+
+
+
+    
+    useEffect(() => {
+        const orderBy = () => {
+            if(category === 'lowIncome'){
+                let x = firtsThreeAgents.sort((a, b) => a.income - b.income)
+                setFirtsThreeAgents(x)
+            }else if (category === 'alphabetically') {
+                let x = firtsThreeAgents.sort((a, b) => {
+                    if (a.name > b.name) {
+                        return 1;
+                    } else if (a.name < b.name) {
+                        return -1;
+                    }
+                      return 0;
+                })              
+                setFirtsThreeAgents(x)
+            }else if(category === 'highIncome'){
+                let z = firtsThreeAgents.sort((a, b) => b.income - a.income)
+                setFirtsThreeAgents(z)
+                console.log(z);
+                return
+            }
+        }
+        orderBy()
+    }, [category])
 
 
 
@@ -123,8 +178,12 @@ const showLeesAgentsOnlist = () => {
 
         //* functions
         filterAgents,
-        getFirstThreeAgents,
+        // getFirstThreeAgents,
         showLeesAgentsOnlist,
+        //orderAgentsByIncome,
+        // orderBy
+        selectCategory,
+        seeMoreAgents,
       }}
     >
       {props.children}

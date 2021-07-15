@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AgentCardMobile from "./AgentCardMobile";
 
 
 
@@ -6,7 +7,7 @@ import React from "react";
 const AgentCard = ({agentName, agentId, agentIncome, agentAvatar}:any) => {
 
 
- 
+
 
   return (
     <>

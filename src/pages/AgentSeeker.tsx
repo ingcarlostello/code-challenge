@@ -19,7 +19,7 @@ const AgentSeeker = () => {
 
     return (
         <>
-            <div className="flex h-screen justify-center items-center">
+            <div className="flex h-screen justify-center items-center px-8">
                 <div className="grid justify-items-stretch">
                     <div className="justify-self-center mb-6">
                         <img className="h-8 w-auto sm:h-10" src={usersImage} alt="zoe" />

@@ -5,7 +5,8 @@ import zoeLogo from "../assets/zoe.png"
 const Header = () => {
     return (
         <>
-            <div className="relative bg-gray-50 pl-4 py-3">
+            {/* <div className="lg:relative bg-gray-50 shadow-lg pl-4 py-3 lg:shadow-sm"> */}
+            <div className="bg-gray-50 relative pl-4 py-3 shadow-lg lg:shadow-sm">
                 <div>
                     <a href="https://zoefin.com/">
                         <img className="h-8 w-auto sm:h-10" src={zoeLogo} alt="zoe" />
