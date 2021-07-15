@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState } from "react";
 
+// @Packages
+import Swal from 'sweetalert2'
+
 export const AgentsContext = createContext();
 
 const AgentsProvider = (props) => {
@@ -10,32 +13,35 @@ const AgentsProvider = (props) => {
   const [income, setIncome] = useState(null);
   const [count, setCount] = useState(0);
   const [firtsThreeAgents, setFirtsThreeAgents] = useState([]);
-  const [category, setCategory] = useState('')
-  const [seeMore, setSeeMore] = useState(0)
+  const [category, setCategory] = useState(null);
+  const [seeMore, setSeeMore] = useState(0);
+  const [seeLess, setSeeLess] = useState(0);
 
   const selectCategory = (orderBy) => {
-    if(orderBy === 'lowIncome'){
-        setCategory(orderBy)
-        return
-    }else if (orderBy === 'highIncome'){
-        setCategory(orderBy)
-        return
-    }else if(orderBy === 'alphabetically') {
-        setCategory(orderBy)
-        return
+    if (orderBy === "lowIncome") {
+      setCategory(orderBy);
+      return;
+    } else if (orderBy === "highIncome") {
+      setCategory(orderBy);
+      return;
+    } else if (orderBy === "alphabetically") {
+      setCategory(orderBy);
+      return;
     }
-  }
-
+  };
 
   const seeMoreAgents = () => {
-    setSeeMore(seeMore + 1)
-  }
-
-
-
-
-
-
+    setSeeMore(seeMore + 1);
+    if (count > filteredAgentsByMoney.length) {
+      Swal.fire("There are no more agents in this search.");
+      return;
+    } else {
+      setCount(count + 3);
+    }
+  };
+  const seeLessAgents = () => {
+    setSeeLess(seeLess - 1);
+  };
 
   useEffect(() => {
     const getAllAgents = async () => {
@@ -46,16 +52,6 @@ const AgentsProvider = (props) => {
     getAllAgents();
   }, []);
 
-
-
-
-
-
-
-
-
-
-
   const filterAgents = (amountMoney) => {
     if (amountMoney) {
       setIncome(amountMoney);
@@ -65,106 +61,103 @@ const AgentsProvider = (props) => {
           agents.income <= amountMoney + 10000
       );
       setFilteredAgentsByMoney(filterAgents);
-    //   getFirstThreeAgents()
+      //   getFirstThreeAgents()
     }
     setAgentSeekerPage(false);
   };
 
-
-
-
-
-
-// useEffect(() => {
-
-//     getFirstThreeAgents()
-// }, [income])
-
-useEffect(() => {
+  //* <--Get First Three Agents-->
+  useEffect(() => {
     const getFirstThreeAgents = () => {
-        if (count > filteredAgentsByMoney.length ) {
-          console.log("There are not more agents that match your search");
-          return;
-        } else {
-          let index = count + 3;
-          // let index = count  
-          let firstThree = filteredAgentsByMoney.slice(0, index);
-          setCount(index);
-          setFirtsThreeAgents(firstThree);
-        }
-      // let index = count
-      // let firstThree = filteredAgentsByMoney.slice(0, index+3);
-      // setCount(index);
-      // setFirtsThreeAgents(firstThree);
-      };
-      getFirstThreeAgents()
-}, [seeMore, category])
-//   useEffect(() => {
-    
-//     getFirstThreeAgents()
-//   }, [filteredAgentsByMoney, agentSeekerPage]);
-// }, [agentSeekerPage]);
+      if (count > filteredAgentsByMoney.length) {
+        Swal.fire("There are no more agents in this search.");
+        return;
+      } else {
+        let index = count;
+        let firstThree = filteredAgentsByMoney.slice(0, index + 3);
+        setFirtsThreeAgents(firstThree);
+      }
+    };
+    getFirstThreeAgents();
+  }, [income, seeMore]);
 
-
-const showLeesAgentsOnlist = () => {
-    if(count === 0 || firtsThreeAgents.length === 0){
-        console.log("There are no more agents on the list");
-        return
-    }else if(firtsThreeAgents.length > 0){
+  //* <--Delete last Three Agents-->
+  useEffect(() => {
+    const showLeesAgentsOnlist = () => {
+      if (firtsThreeAgents.length === 3) {
+        Swal.fire("They are the 3 first agents of the list");
+        return;
+      } else if (firtsThreeAgents.length > 0) {
         let index = count - 3;
+        //let index = 3
         let showLessThree = firtsThreeAgents.slice(0, index);
-        setCount(index)
-        setFirtsThreeAgents(showLessThree)
-        console.log('quito 3 agents', firtsThreeAgents);
-    }
-}
-
-
-
-
-    // const orderAgentsByIncome = () => {
-    //     let x = firtsThreeAgents.sort((a, b) => a.income - b.income)
-    //     setFirtsThreeAgents(x)
-    // }
-
-
-
-
-    
-    useEffect(() => {
-        const orderBy = () => {
-            if(category === 'lowIncome'){
-                let x = firtsThreeAgents.sort((a, b) => a.income - b.income)
-                setFirtsThreeAgents(x)
-            }else if (category === 'alphabetically') {
-                let x = firtsThreeAgents.sort((a, b) => {
-                    if (a.name > b.name) {
-                        return 1;
-                    } else if (a.name < b.name) {
-                        return -1;
-                    }
-                      return 0;
-                })              
-                setFirtsThreeAgents(x)
-            }else if(category === 'highIncome'){
-                let z = firtsThreeAgents.sort((a, b) => b.income - a.income)
-                setFirtsThreeAgents(z)
-                console.log(z);
-                return
-            }
-        }
-        orderBy()
-    }, [category])
+        setCount(index);
+        setFirtsThreeAgents(showLessThree);
+      }
+    };
+    showLeesAgentsOnlist();
+  }, [seeLess]);
 
 
 
 
 
 
+  //* <--Order Agents Alphabetically-->
+  useEffect(() => {
+    setCategory("");
+    const orderAgenstAlphabetically = () => {
+      if (category === "alphabetically" || category === "") {
+        let alphabetically = firtsThreeAgents.sort((a, b) => {
+          if (a.name > b.name) {
+            return 1;
+          } else if (a.name < b.name) {
+            return -1;
+          }
+          return 0;
+          // return setFirtsThreeAgents(alphabetically);
+        });
+        setFirtsThreeAgents(alphabetically);
+      }
+    };
+    orderAgenstAlphabetically();
+  }, [category]);
+
+  //* <--Order Agents by low Income-->
+  useEffect(() => {
+    const lowIncomeFirts = () => {
+      if (category === "lowIncome") {
+        let x = firtsThreeAgents.sort((a, b) => a.income - b.income);
+        setFirtsThreeAgents(x);
+      }
+    };
+    lowIncomeFirts();
+  }, [category]);
+
+  //* <--Order Agents by Hight Income-->
+  useEffect(() => {
+    const HightIncomeFirts = () => {
+      if (category === "highIncome") {
+        let z = firtsThreeAgents.sort((a, b) => b.income - a.income);
+        setFirtsThreeAgents(z)
+        return;
+      }
+    };
+    HightIncomeFirts();
+  }, [category]);
 
 
 
 
+
+
+
+
+
+
+  console.log(filteredAgentsByMoney);
+
+  console.log(firtsThreeAgents);
 
   return (
     <AgentsContext.Provider
@@ -179,11 +172,12 @@ const showLeesAgentsOnlist = () => {
         //* functions
         filterAgents,
         // getFirstThreeAgents,
-        showLeesAgentsOnlist,
+        // showLeesAgentsOnlist,
         //orderAgentsByIncome,
         // orderBy
         selectCategory,
         seeMoreAgents,
+        seeLessAgents,
       }}
     >
       {props.children}

@@ -5,18 +5,18 @@ import React, { useContext } from "react";
 import { AgentsContext } from "../context/AgentsContext";
 
 const SeeMore_SeeLess = () => {
-    const { seeMoreAgents, showLeesAgentsOnlist } = useContext(AgentsContext);
+    const { seeMoreAgents, seeLessAgents } = useContext(AgentsContext);
 
-    const showLessAgents = () => {
-        showLeesAgentsOnlist();
-    };
+    // const showLessAgents = () => {
+    //     showLeesAgentsOnlist();
+    // };
 
     return (
         <>
             <div>
                 <span
                     className="mr-5 font-bold cursor-pointer"
-                    onClick={showLessAgents}
+                    onClick={() => seeLessAgents()}
                     style={{ color: "#5C7BEB" }}
                 >
                     Show less <span className="ml-4">-</span>
