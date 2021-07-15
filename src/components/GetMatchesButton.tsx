@@ -1,3 +1,4 @@
+// @React
 import React, { useContext } from "react";
 
 // @Context
@@ -9,18 +10,15 @@ import { labels } from "../labels/labels";
 // @Packages
 import Swal from 'sweetalert2'
 
-
-
 const GetMatchesButton = ({ amountMoney }: any) => {
 
   const { filterAgents } = useContext(AgentsContext);
 
-  const handleClick = () => {
-    console.log(amountMoney);
-    if(amountMoney === undefined || amountMoney === 0){
+  const handleClick = (e:any) => {
+    if(amountMoney === undefined || amountMoney === 0 ||  amountMoney === ''){
       Swal.fire('Enter an income')
       return
-    }    
+    }  
     filterAgents(amountMoney);
   };
 

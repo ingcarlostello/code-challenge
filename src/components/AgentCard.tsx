@@ -1,8 +1,5 @@
 // @React
-import React, { useEffect } from "react";
-
-// @Components
-import AgentCardMobile from "./AgentCardMobile";
+import React from "react";
 
 const AgentCard = ({ agentName, agentId, agentIncome, agentAvatar }: any) => {
   return (

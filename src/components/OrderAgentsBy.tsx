@@ -15,7 +15,7 @@ const OrderAgentsBy = () => {
         className="focus:ring-indigo-500 focus:border-indigo-500 lg:w-56 sm:text-sm border-2 border-gray-300 rounded-md h-12 w-full"
         onChange={(e) => selectCategory(e.target.value)}
       >
-        <option hidden selected>
+        <option hidden value=''>
           Select...
         </option>
         <option className="p-5" value="alphabetically">

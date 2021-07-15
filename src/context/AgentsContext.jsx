@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState } from "react";
 
 export const AgentsContext = createContext();
@@ -44,7 +45,7 @@ const AgentsProvider = (props) => {
     };
     getAllAgents();
   }, []);
-  console.log(agentsList);
+
 
 
 
@@ -163,8 +164,7 @@ const showLeesAgentsOnlist = () => {
 
 
 
-  console.log(filteredAgentsByMoney);
-  console.log(firtsThreeAgents);
+
 
   return (
     <AgentsContext.Provider
